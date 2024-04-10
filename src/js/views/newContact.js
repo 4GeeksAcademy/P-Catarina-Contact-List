@@ -36,45 +36,48 @@ function NewContact() {
 		{/* address */}
 		<div className="mb-3">
 			<label for="address" className="form-label">Address</label>
-			<input type="text" className="form-control" id="address" placeholder="Enter address"
+			<input type="text" className="form-control" id="address" placeholder={store.inputs.length}
 				value={store.inputs.address || ""} 
 				onChange={event => actions.getInput(event)}
 				required />
 		</div>
 		{/* actions - save & cancel */}
-		<button type="submit" className="col-12 my-2 btn btn-success"
+		{Object.keys(store.inputs).length === 4
+		? <button type="submit" className="col-12 my-2 btn btn-success"
 			data-bs-toggle="modal" data-bs-target="#addModal">
 			save
-		</button>
+		  </button>
+		: null}
 		<Link to="/" className="col-12 my-2 btn btn-secondary"
 			onClick={actions.resetInput}>
 			cancel
 		</Link>
-	</form>
 	{/* Modal - added confirmation */}
 	<div className="modal fade" id="addModal" tabindex="-1" aria-labelledby="#confirmAdd" aria-hidden="true">
-  <div className="modal-dialog">
-    <div className="modal-content">
-      <div className="modal-header">
-        <h1 className="modal-title fs-5" id="confirmAdd">New Contact</h1>
-        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div className="modal-body">
-        <p>New Contact added sucessfully.</p>
-      </div>
-      <div className="modal-footer">
-		<Link to="/">
-        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
-			Back to List
-		</button>
-		</Link>
-        <button type="button" className="btn btn-primary" data-bs-dismiss="modal">
-			Add another Contact
-		</button>
-      </div>
-    </div>
-  </div>
-</div>
+	<div className="modal-dialog">
+		<div className="modal-content">
+		<div className="modal-header">
+			<h1 className="modal-title fs-5" id="confirmAdd">New Contact</h1>
+			<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div className="modal-body">
+			<p>New Contact added sucessfully.</p>
+		</div>
+		<div className="modal-footer">
+			<Link to="/">
+			<button type="button" className="btn btn-primary" data-bs-dismiss="modal">
+				Back to List
+			</button>
+			</Link>
+			<button className="btn btn-secondary" data-bs-dismiss="modal"
+				onClick={actions.resetInput}>
+				Add another Contact
+			</button>
+		</div>
+		</div>
+	</div>
+	</div>
+	</form>
 	</>
 	);
 };

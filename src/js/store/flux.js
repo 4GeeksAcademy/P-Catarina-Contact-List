@@ -86,7 +86,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					if(response.status === 201) return;
 					throw Error(response.status)
 				}).then(() => {
-					getActions().getContactList();
+					getActions().getContactList()
 					getActions().resetInput()
 				}).catch(err => {
 					console.log(err);
